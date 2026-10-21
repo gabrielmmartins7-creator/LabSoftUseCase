@@ -23,6 +23,8 @@ public partial class DbTasksContext : DbContext
 
     public DbSet<Departamento> Departamentos { get; set; }
 
+    public DbSet<CentralDeCusto> CentraisDeCusto { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=ConexaoSqlServer");
 

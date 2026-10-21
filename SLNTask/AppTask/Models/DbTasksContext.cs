@@ -21,6 +21,8 @@ public partial class DbTasksContext : DbContext
 
     public virtual DbSet<Tarefa> Tarefas { get; set; }
 
+    public DbSet<Departamento> Departamentos { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=ConexaoSqlServer");
 

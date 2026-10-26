@@ -1,48 +1,62 @@
 ﻿@model AppTask.Models.Incidente
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Cadastrar Incidente";
 }
 
-<h1>Create</h1>
+<div class="container mt-4">
+    <h2>Cadastrar Incidente</h2>
 
-<h4>Incidente</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DescricaoProblema" class="control-label"></label>
-                <input asp-for="DescricaoProblema" class="form-control" />
-                <span asp-validation-for="DescricaoProblema" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataIncidente" class="control-label"></label>
-                <input asp-for="DataIncidente" class="form-control" />
-                <span asp-validation-for="DataIncidente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Solucao" class="control-label"></label>
-                <input asp-for="Solucao" class="form-control" />
-                <span asp-validation-for="Solucao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Resolvido" class="control-label"></label>
-                <input asp-for="Resolvido" class="form-control" />
-                <span asp-validation-for="Resolvido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+    <form action="/Incidente/Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label for="DescricaoProblema" class="form-label">
+                Descrição do problema
+            </label>
+            <textarea id="DescricaoProblema"
+                      name="DescricaoProblema"
+                      class="form-control"
+                      rows="3"
+                      required>@Model?.DescricaoProblema</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="DataIncidente" class="form-label">
+                Data do incidente
+            </label>
+            <input type="datetime-local"
+                   id="DataIncidente"
+                   name="DataIncidente"
+                   class="form-control"
+                   value="@(Model?.DataIncidente.ToString("yyyy-MM-ddTHH:mm"))"
+                   required />
+        </div>
+
+        <div class="mb-3">
+            <label for="Solucao" class="form-label">Solução</label>
+            <textarea id="Solucao"
+                      name="Solucao"
+                      class="form-control"
+                      rows="3">@Model?.Solucao</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="Resolvido" class="form-label">Resolvido?</label>
+            <select id="Resolvido" name="Resolvido"
+                    class="form-select" required>
+                <option value="">Selecione</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Salvar
+        </button>
+
+        <a href="/Incidente" class="btn btn-secondary">
+            Voltar
+        </a>
+    </form>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
